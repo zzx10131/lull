@@ -1,0 +1,21 @@
+# local tooling / captures
+*.exe
+.bak/
+.preview-server.cjs
+.capture*.cjs
+.probe*.cjs
+.cap-*.cjs
+.check.cjs
+.v.cjs
+shots/
+shots2/
+shots-test/
+shots-mobile/
+shots-v2/
+shots-v3/
+v/
+
+# os noise
+.DS_Store
+Thumbs.db
+node_modules/

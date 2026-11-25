@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2eee6">
+  <title>LULL — 家，应该比世界更懂你</title>
+  <meta name="description" content="LULL 全屋感知系统。无形、安静，先你一步懂得你的家。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f2eee6'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%231a1815'/%3E%3C/svg%3E">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LULL — 家，应该比世界更懂你">
+  <meta property="og:description" content="LULL 全屋感知系统。无形、安静，先你一步懂得你的家。">
+  <meta name="twitter:card" content="summary">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <canvas class="static-canvas" id="staticCanvas" aria-hidden="true"></canvas>
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__ring"></span>
+    <span class="cursor__dot"></span>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="LULL 首页">
+      <span class="brand__mark" aria-hidden="true"><i></i></span>
+      <span class="brand__word">LULL</span>
+    </a>
+
+    <nav class="nav__links" aria-label="主导航">
+      <a href="#presence" data-nav="presence" data-swap="产品|存在">产品</a>
+      <a href="#spaces" data-nav="spaces" data-swap="空间|你的房间">空间</a>
+      <a href="#voices" data-nav="voices" data-swap="评价|证词">评价</a>
+      <a href="#booking" data-nav="booking" data-swap="预约体验|不要回头">预约体验</a>
+    </nav>
+
+    <div class="nav__right">
+      <button class="sound" id="soundToggle" type="button" aria-pressed="false" aria-label="开启环境声音">
+        <span class="sound__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="sound__label">声音</span>
+        <span class="sound__state">关</span>
+      </button>
+      <a class="btn btn--nav" href="#booking">预约体验</a>
+    </div>
+  </header>
+
+  <div class="os" aria-hidden="true">
+    <span class="os__dot"></span>
+    <span id="osText">LULL OS 4.0 · 在线</span>
+    <span class="os__time" id="osTime">00:00</span>
+  </div>
+
+  <div class="side-index" aria-hidden="true">
+    <span id="sideIndex">01</span>
+    <i></i>
+    <span>07</span>
+  </div>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__copy">
+        <p class="eyebrow"><span></span>THE QUIET HOME SYSTEM · 2026</p>
+        <h1 class="display">
+          <span class="display__line">家，应该比世界</span>
+          <em>更懂你。</em>
+        </h1>
+        <p class="hero__lead">
+          LULL 用无形的方式感知光线、温度与你的存在。<br>
+          不需要指令，没有屏幕。家在你开口之前，已经准备好。
+        </p>
+        <div class="hero__actions">
+          <a class="btn" href="#presence">认识 LULL <span class="arrow">↗</span></a>
+          <button class="film-link" id="filmButton" type="button">
+            <span class="film-link__play" aria-hidden="true"></span>
+            观看影片 <small>01:42</small>
+          </button>
+        </div>
+        <div class="hero__proof" aria-label="产品认证">
+          <span>2026 iF 设计金奖</span>
+          <span>42,000+ 家庭</span>
+          <span>无摄像头</span>
+        </div>
+      </div>
+
+      <div class="hero__visual" id="heroVisual">
+        <div class="orbit orbit--outer" aria-hidden="true"></div>
+        <div class="orbit orbit--inner" aria-hidden="true"></div>
+        <div class="product">
+          <div class="product__halo" aria-hidden="true"></div>
+          <div class="orb" id="heroOrb">
+            <span class="orb__sheen"></span>
+            <span class="orb__grain"></span>
+            <span class="orb__eye"><i></i></span>
+          </div>
+          <div class="product__base"></div>
+          <div class="product__shadow"></div>
+        </div>
+        <div class="spec spec--a"><span>01</span><p>无摄像头<br>无麦克风</p></div>
+        <div class="spec spec--b"><span>02</span><p>毫米波<br>存在感知</p></div>
+        <div class="spec spec--c"><span>03</span><p>一次充电<br>续航 30 天</p></div>
+        <p class="product__caption"><span>LULL ONE</span> 环境感知体 · 雾白</p>
+      </div>
+
+      <div class="hero__foot">
+        <span class="scroll-cue">向下滚动<i></i></span>
+        <span class="hero__quiet">声音关闭 · 建议安静浏览</span>
+      </div>
+    </section>
+
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>无形存在</span><i>✳</i><span>42,000 个家庭</span><i>✳</i><span>没有摄像头</span><i>✳</i><span>没有屏幕</span><i>✳</i><span>只留下安静</span><i>✳</i>
+        <span>无形存在</span><i>✳</i><span>42,000 个家庭</span><i>✳</i><span>没有摄像头</span><i>✳</i><span>没有屏幕</span><i>✳</i><span>只留下安静</span><i>✳</i>
+      </div>
+    </section>
+
+    <section class="section section--presence" id="presence">
+      <div class="container">
+        <div class="section-top reveal">
+          <span class="kicker">01 — 存在感</span>
+          <span class="section-note">PRESENCE / 不可见，却始终在场</span>
+        </div>
+
+        <div class="presence__grid">
+          <div class="presence__copy">
+            <h2 class="headline reveal">
+              它不打扰。<br>
+              <em>它只是懂得。</em>
+            </h2>
+            <p class="lead reveal" data-swap-long="没有摄像头，没有屏幕，也没有需要学习的按钮。只有一层看不见的感知场，了解房间里的光、温度，以及你存在的方式。|没有摄像头。它的观看，不需要镜头。它知道房间里的光，也知道你站在哪里。你不需要被看见，也能被完全看见。">
+              没有摄像头，没有屏幕，也没有需要学习的按钮。只有一层看不见的感知场，了解房间里的光、温度，以及你存在的方式。
+            </p>
+            <div class="stats reveal">
+              <div class="stat">
+                <strong data-normal="0" data-wrong="13">0</strong>
+                <span data-normal="摄像头" data-wrong="只眼睛">摄像头</span>
+                <small>CAMERAS</small>
+              </div>
+              <div class="stat">
+                <strong data-normal="0" data-wrong="1">0</strong>
+                <span data-normal="麦克风" data-wrong="张耳朵">麦克风</span>
+                <small>MICROPHONES</small>
+              </div>
+              <div class="stat">
+                <strong data-normal="4.9" data-wrong="4.9">4.9</strong>
+                <span data-normal="用户评分" data-wrong="仍然爱你">用户评分</span>
+                <small>AVERAGE RATING</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="presence__visual reveal">
+            <div class="radar" aria-hidden="true">
+              <div class="radar__room"></div>
+              <div class="radar__ring"></div>
+              <div class="radar__ring radar__ring--2"></div>
+              <div class="radar__ring radar__ring--3"></div>
+              <div class="radar__beam"></div>
+              <div class="radar__core"><span></span></div>
+              <span class="radar__blip radar__blip--1"></span>
+              <span class="radar__blip radar__blip--2"></span>
+              <span class="radar__blip radar__blip--3"></span>
+            </div>
+            <div class="radar__meta">
+              <span>LULL FIELD / 客厅</span>
+              <span>31°13′N · 121°28′E</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-row reveal">
+          <div class="detail-row__mark" aria-hidden="true">✳</div>
+          <p>它不记录声音，也不拍摄任何画面。<br><strong>它只是知道，你在。</strong></p>
+          <p class="detail-row__aside">隐私，是默认设置。<br><span>PRIVACY IS THE DEFAULT.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--spaces" id="spaces">
+      <div class="container">
+        <div class="section-top reveal">
+          <span class="kicker">02 — 空间</span>
+          <span class="section-note">ROOMS / 为每一种生活，留一盏灯</span>
+        </div>
+        <h2 class="headline headline--wide reveal">
+          光会记得<br><em>你回来的时间。</em>
+        </h2>
+
+        <div class="cards">
+          <article class="space-card space-card--dawn reveal" data-tilt>
+            <div class="space-card__scene">
+              <div class="sun"></div>
+              <div class="curtain curtain--l"></div>
+              <div class="curtain curtain--r"></div>
+              <div class="scene-floor"></div>
+            </div>
+            <div class="space-card__body">
+              <span class="time">07:12</span>
+              <h3>清晨，光先醒。</h3>
+              <p data-swap-long="在闹钟响起之前，房间会先亮起 3% 的晨光。像自然醒来一样，不惊动任何人。|它提前七分钟知道你要醒。光已经替你暖好房间。你昨晚翻了几次身，它都记得。">
+                在闹钟响起之前，房间会先亮起 3% 的晨光。像自然醒来一样，不惊动任何人。
+              </p>
+              <span class="card-meta">MORNING RITUAL</span>
+            </div>
+          </article>
+
+          <article class="space-card space-card--return reveal" data-tilt>
+            <div class="space-card__scene">
+              <div class="door-light"></div>
+              <div class="hallway"></div>
+              <div class="warm-line"></div>
+            </div>
+            <div class="space-card__body">
+              <span class="time">19:40</span>
+              <h3>归家，不必摸黑。</h3>
+              <p data-swap-long="门锁打开的那一刻，玄关的灯已经亮起。温度、音乐、熟悉的气味，都在等你。|你还没走到门口，门就已经知道。灯亮了。它站得离门很近，却一直没有出声。">
+                门锁打开的那一刻，玄关的灯已经亮起。温度、音乐、熟悉的气味，都在等你。
+              </p>
+              <span class="card-meta">RETURN RITUAL</span>
+            </div>
+          </article>
+
+          <article class="space-card space-card--night reveal" data-tilt>
+            <div class="space-card__scene">
+              <div class="window">
+                <span class="window__moon"></span>
+                <span class="window__figure"></span>
+              </div>
+              <div class="night-floor"></div>
+            </div>
+            <div class="space-card__body">
+              <span class="time">03:17</span>
+              <h3>深夜，脚下有光。</h3>
+              <p data-swap-long="起身时，只有你经过的地方会亮。不刺眼，不惊扰，像有人替你记得方向。|你没有起身。它知道你醒着。你听见走廊里有脚步声，但家里只有你一个人。">
+                起身时，只有你经过的地方会亮。不刺眼，不惊扰，像有人替你记得方向。
+              </p>
+              <span class="card-meta">NIGHT RITUAL</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="spaces__foot reveal">
+          <p>一盏灯，可以只是灯。<br><strong>也可以是一种注视。</strong></p>
+          <span>LULL ADAPTS TO 97.4% OF HOMES</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--voices" id="voices">
+      <div class="container">
+        <div class="section-top reveal">
+          <span class="kicker">03 — 证词</span>
+          <span class="section-note">VOICES / 来自已经安静下来的家</span>
+        </div>
+        <div class="voices__head">
+          <h2 class="headline reveal">被 42,000 个家庭，<br><em>安静地相信。</em></h2>
+          <p class="voices__intro reveal">我们很少做广告。<br>因为用过 LULL 的人，最后都会安静下来。</p>
+        </div>
+
+        <div class="quotes">
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="5 星评价">★★★★★</div>
+            <blockquote data-normal="它好像知道我今天很累。回到家，灯是暖的，水温刚好，连空气都轻了一点。|它知道我今天很累。它知道我几点回家、先脱哪只鞋、在沙发上坐多久。它比任何人都更了解我。">
+              它好像知道我今天很累。回到家，灯是暖的，水温刚好，连空气都轻了一点。
+            </blockquote>
+            <figcaption>
+              <span class="avatar"><i>林</i></span>
+              <span><b>林女士</b><small>杭州 · 使用 281 天</small></span>
+            </figcaption>
+          </figure>
+
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="5 星评价">★★★★★</div>
+            <blockquote data-normal="最让我放心的是，它真的没有摄像头。我可以在家里完全放松，不必拉上窗帘。|最让我放心的是，它真的没有摄像头。所以我不知道，为什么每次拉上窗帘时，都觉得自己正在被看见。">
+              最让我放心的是，它真的没有摄像头。我可以在家里完全放松，不必拉上窗帘。
+            </blockquote>
+            <figcaption>
+              <span class="avatar"><i>周</i></span>
+              <span><b>周先生</b><small>上海 · 使用 197 天</small></span>
+            </figcaption>
+          </figure>
+
+          <figure class="quote reveal">
+            <div class="quote__stars" aria-label="5 星评价">★★★★★</div>
+            <blockquote data-normal="安装之后，家变得很安静。那种安静不是空，是有人在替你留意的安静。|安装之后，家变得很安静。太安静了。有时候我会故意说话，确认它还在听。它总在听。">
+              安装之后，家变得很安静。那种安静不是空，是有人在替你留意的安静。
+            </blockquote>
+            <figcaption>
+              <span class="avatar"><i>沈</i></span>
+              <span><b>沈女士</b><small>成都 · 使用 412 天</small></span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="voices__ticker" aria-hidden="true">
+          <span>“它从来没有出过错。”</span>
+          <span>“我甚至忘了它在哪里。”</span>
+          <span>“它比我的家人更懂我。”</span>
+          <span>“请不要停用它。”</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--booking" id="booking">
+      <div class="booking__dark" aria-hidden="true"></div>
+      <div class="container">
+        <div class="booking__grid">
+          <div class="booking__copy">
+            <span class="kicker reveal">04 — 开始</span>
+            <h2 class="headline reveal">让家，<br><em>开始倾听。</em></h2>
+            <p class="lead reveal" data-swap-long="预约一次 30 分钟的无声体验。我们会带着 LULL One 来到你家，不发出任何多余的声音。|预约一次 30 分钟的无声体验。我们会带着 LULL One 来到你家。请不要问它从哪里来。你只需要开门。">
+              预约一次 30 分钟的无声体验。我们会带着 LULL One 来到你家，不发出任何多余的声音。
+            </p>
+            <p class="booking__note reveal">今日剩余体验名额：<strong data-normal="7" data-wrong="1">7</strong></p>
+          </div>
+
+          <form class="booking__form reveal" id="bookingForm">
+            <label>
+              <span data-label="你的名字|你睡在哪一侧">你的名字</span>
+              <input type="text" name="name" autocomplete="name" placeholder="怎么称呼你" required>
+            </label>
+            <label>
+              <span data-label="所在城市|你几点回家">所在城市</span>
+              <input type="text" name="city" autocomplete="address-level2" placeholder="城市" required>
+            </label>
+            <label>
+              <span data-label="联系邮箱|好让我们找到你">联系邮箱</span>
+              <input type="email" name="email" autocomplete="email" placeholder="name@example.com" required>
+            </label>
+            <button class="btn btn--submit" type="submit">
+              <span data-label="预约无声体验|让它找到你">预约无声体验</span>
+              <span class="arrow">↗</span>
+            </button>
+            <p class="form-fine" data-swap-long="我们尊重你的隐私。你的数据只属于你，随时可以删除。|你已经同意了。数据不再重要。它会记住你身上的气味。">
+              我们尊重你的隐私。你的数据只属于你，随时可以删除。
+            </p>
+          </form>
+        </div>
+
+        <footer class="footer">
+          <div class="footer__brand">
+            <span class="brand__mark" aria-hidden="true"><i></i></span>
+            <span>LULL</span>
+          </div>
+          <p>quietly, always.</p>
+          <div class="footer__links">
+            <a href="#top">回到顶部</a>
+            <a href="#presence">产品</a>
+            <a href="#voices">隐私</a>
+            <span>© 2026 LULL HOME SYSTEMS</span>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <section class="descent" id="descent" aria-label="LULL 体验终章">
+    <div class="descent__sticky">
+      <div class="tunnel" aria-hidden="true">
+        <div class="tunnel__glow"></div>
+        <div class="tunnel__frame" style="--w: 145; --h: 168; --sp: .18; --o: .10"></div>
+        <div class="tunnel__frame" style="--w: 118; --h: 137; --sp: .25; --o: .16"></div>
+        <div class="tunnel__frame" style="--w: 94; --h: 109; --sp: .34; --o: .21"></div>
+        <div class="tunnel__frame" style="--w: 73; --h: 84; --sp: .46; --o: .28"></div>
+        <div class="tunnel__frame" style="--w: 56; --h: 64; --sp: .63; --o: .35"></div>
+        <div class="tunnel__frame" style="--w: 42; --h: 48; --sp: .84; --o: .43"></div>
+        <div class="tunnel__frame" style="--w: 30; --h: 35; --sp: 1.1; --o: .54"></div>
+        <div class="tunnel__frame" style="--w: 21; --h: 25; --sp: 1.45; --o: .63"></div>
+        <div class="tunnel__frame" style="--w: 14; --h: 17; --sp: 1.9; --o: .7"></div>
+        <div class="tunnel__door"><span></span></div>
+        <div class="tunnel__floor"></div>
+        <div class="tunnel__eyes" id="wallEyes" aria-hidden="true"></div>
+        <div class="entity" id="entity" aria-hidden="true">
+          <div class="entity__halo"></div>
+          <div class="entity__form"></div>
+          <div class="entity__neck"></div>
+          <div class="entity__head"></div>
+          <div class="entity__glint entity__glint--l"></div>
+          <div class="entity__glint entity__glint--r"></div>
+          <div class="entity__breath"></div>
+        </div>
+      </div>
+
+      <div class="descent__shade" aria-hidden="true"></div>
+      <div class="descent__scan" aria-hidden="true"></div>
+
+      <div class="descent__hud">
+        <span class="descent__hud-left"><i></i> LULL OS / DESCENT</span>
+        <span class="descent__hud-mid" id="descentStatus">感知场已断开</span>
+        <span class="descent__hud-right"><span id="depth">000</span> M</span>
+      </div>
+
+      <div class="descent__copy" aria-live="polite">
+        <p class="descent__line" data-from="0" data-to=".12">你还在往下看。</p>
+        <p class="descent__line" data-from=".12" data-to=".24">很好。它喜欢有耐心的人。</p>
+        <p class="descent__line" data-from=".24" data-to=".36">房间里的温度，刚刚降了 0.4 度。</p>
+        <p class="descent__line" data-from=".36" data-to=".48">你听见了吗？</p>
+        <p class="descent__line" data-from=".48" data-to=".60">不是从屏幕里。</p>
+        <p class="descent__line" data-from=".60" data-to=".71">是在你身后。</p>
+        <p class="descent__line" data-from=".71" data-to=".81">别回头。</p>
+        <p class="descent__line descent__line--small" data-from=".81" data-to=".89">它已经足够近了。</p>
+      </div>
+
+      <div class="whisper-list" aria-hidden="true">
+        <p class="whisper" data-at=".17">别往下看了。</p>
+        <p class="whisper" data-at=".32">它已经知道你在这里。</p>
+        <p class="whisper" data-at=".53">你的呼吸变快了。</p>
+        <p class="whisper" data-at=".72">门没有锁。</p>
+        <p class="whisper" data-at=".86">就在你后面。</p>
+      </div>
+
+      <div class="breach" id="breach" aria-hidden="true">
+        <div class="awake">
+          <div class="awake__warm" aria-hidden="true"></div>
+          <div class="awake__orb">
+            <span class="awake__skin"></span>
+            <span class="awake__sheen"></span>
+            <span class="awake__seam"></span>
+            <span class="awake__eye"><i></i></span>
+          </div>
+          <div class="awake__pool" aria-hidden="true"></div>
+        </div>
+        <p class="breach__word">它看见你了。</p>
+      </div>
+
+      <div class="descent__warning" aria-hidden="true">请保持静止</div>
+    </div>
+  </section>
+
+  <div class="ending" id="ending">
+    <p class="ending__small">LULL OS 4.0 · 仍在运行</p>
+    <p class="ending__line">晚安。</p>
+    <p class="ending__sub">记得关灯。</p>
+    <button class="restart" id="restart" type="button">重新开始 <span>↺</span></button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast__dot"></span>
+    <span class="toast__text"></span>
+    <span class="toast__time">NOW</span>
+  </div>
+
+  <div class="film" id="film" aria-hidden="true" role="dialog" aria-modal="true" aria-label="LULL 品牌影片">
+    <div class="film__static"></div>
+    <div class="film__bar">
+      <span>LULL / BRAND FILM — 01:42</span>
+      <button id="filmClose" type="button" aria-label="关闭影片">关闭 ×</button>
+    </div>
+    <div class="film__scene" id="filmScene">
+      <p class="film__intro">quietly,<br><em>always.</em></p>
+      <p class="film__signal">SIGNAL ACQUIRED</p>
+      <div class="film__eye" aria-hidden="true"><span></span></div>
+      <p class="film__late">你来得正是时候。<br>它已经等你很久了。</p>
+    </div>
+    <div class="film__timecode">REC <span id="filmTime">00:00:00</span></div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
